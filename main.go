@@ -28,18 +28,9 @@ func main() {
 	r.POST("/day/:day", func(c *gin.Context) {
 		day := c.Param("day")
 		input := strings.Fields(c.PostForm("input"))
-		var i2 = []int{}
 
-		for _, i := range input {
-			j, err := strconv.Atoi(i)
-			if err != nil {
-				panic(err)
-			}
-			i2 = append(i2, j)
-		}
-
-		resA, _ := Call(day+"a", i2)
-		resB, _ := Call(day+"b", i2)
+		resA, _ := Call(day+"a", input)
+		resB, _ := Call(day+"b", input)
 
 		c.JSON(200, gin.H{
 			"day" + day + "a_result": resA,
